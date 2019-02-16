@@ -1,0 +1,21 @@
+﻿@model BlogWeb.Models.Post
+<html>
+<head>
+    <title>Novo Post</title>
+</head>
+<body>
+    <form action="/Post/Editar" method="post">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <label>
+            Titulo : <input name="Titulo" value="@Model.Titulo"/>
+        </label>
+        <label>
+            Resumo : <input name="Resumo" value="@Model.Resumo"/>
+        </label>
+        <label>
+            Categoria : <input name="Categoria" value="@Model.Categoria" />
+        </label>
+        <button type="submit">Submeter</button>
+    </form>
+</body>
+</html>

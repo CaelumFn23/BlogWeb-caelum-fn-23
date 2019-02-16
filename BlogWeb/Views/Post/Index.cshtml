@@ -1,0 +1,29 @@
+﻿@model IEnumerable<BlogWeb.Models.Post>
+<html>
+<head>
+    <title>Lista de Posts</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Resumo</th>
+                <th>Categoria</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><a href="/Post/Visualiza/@item.Id">@item.Titulo</a></td>
+                    <td>@item.Resumo</td>
+                    <td>@item.Categoria</td>
+                    <td><a href="/Post/Remover/@item.Id">Remover</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
