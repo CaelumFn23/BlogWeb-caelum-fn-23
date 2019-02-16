@@ -11,9 +11,11 @@
         <label>
             Titulo : <input name="Titulo" value="@Model.Titulo"/>
         </label>
+        @Html.ValidationMessage("Titulo")
         <label>
             Resumo : <input name="Resumo" value="@Model.Resumo"/>
         </label>
+        @Html.ValidationMessage("Resumo")
         <label>
             Categoria : <input name="Categoria" value="@Model.Categoria" />
         </label>

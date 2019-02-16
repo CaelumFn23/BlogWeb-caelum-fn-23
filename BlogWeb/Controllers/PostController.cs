@@ -21,15 +21,21 @@ namespace BlogWeb.Controllers
 
         public IActionResult Novo()
         {
-            return View();
+            return View(new Post());
         }
 
         [HttpPost]
         public IActionResult Adiciona(Post p)
         {
-            PostDAO.Adiciona(p);
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                PostDAO.Adiciona(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Novo", p);
+            }
         }
 
         [HttpGet]
@@ -44,7 +50,7 @@ namespace BlogWeb.Controllers
             PostDAO.Editar(p);
             return RedirectToAction("Index");
         }
-        
+
         public IActionResult Remover(int id)
         {
             PostDAO.Remover(id);
@@ -53,7 +59,7 @@ namespace BlogWeb.Controllers
 
         public IActionResult BuscaPorCategoria(string categoria)
         {
-            return View("Index",PostDAO.BuscaPorCategoria(categoria));
+            return View("Index", PostDAO.BuscaPorCategoria(categoria));
         }
 
         public IActionResult Publicar(int id)

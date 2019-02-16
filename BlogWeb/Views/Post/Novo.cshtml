@@ -1,4 +1,4 @@
-﻿
+﻿@model BlogWeb.Models.Post
 <html>
 <head>
     <title>Novo Post</title>
@@ -6,13 +6,15 @@
 <body>
     <form action="/Post/Adiciona" method="post">
         <label>
-            Titulo : <input name="Titulo" />
+            Titulo : <input name="Titulo" value="@Model.Titulo" />
         </label>
+        @Html.ValidationMessage("Titulo")
         <label>
-            Resumo : <input name="Resumo" />
+            Resumo : <input name="Resumo" value="@Model.Resumo" />
         </label>
+        @Html.ValidationMessage("Resumo")
         <label>
-            Categoria : <input name="Categoria" />
+            Categoria : <input name="Categoria" value="@Model.Categoria" />
         </label>
         <button type="submit">Submeter</button>
     </form>
