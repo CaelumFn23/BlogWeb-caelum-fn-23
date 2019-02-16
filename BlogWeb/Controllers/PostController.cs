@@ -47,8 +47,15 @@ namespace BlogWeb.Controllers
         [HttpPost]
         public IActionResult Editar(Post p)
         {
-            PostDAO.Editar(p);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                PostDAO.Editar(p);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View("Visualiza", p);
+            }
         }
 
         public IActionResult Remover(int id)
