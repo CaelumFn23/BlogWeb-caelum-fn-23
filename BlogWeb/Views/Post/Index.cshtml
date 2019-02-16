@@ -10,6 +10,8 @@
                 <th>Titulo</th>
                 <th>Resumo</th>
                 <th>Categoria</th>
+                <th>Publicado</th>
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -20,7 +22,24 @@
                     <td><a href="/Post/Visualiza/@item.Id">@item.Titulo</a></td>
                     <td>@item.Resumo</td>
                     <td>@item.Categoria</td>
+                    @if (item.Publicado)
+                    {
+                        <td>@string.Format("{0:dd/MM/yyyy}", item.DataPublicacao)</td>
+                    }
+                    else
+                    {
+                        <td>Não</td>
+                    }
+                    <td></td>
                     <td><a href="/Post/Remover/@item.Id">Remover</a></td>
+                    @if (!item.Publicado)
+                    {
+                        <td><a href="/Post/Publicar/@item.Id">Publicar</a></td>
+                    }
+                    else
+                    {
+                        <td><a href="/Post/RetirarPublicacao/@item.Id">Retirar Publicacao</a></td>
+                    }
                 </tr>
             }
         </tbody>

@@ -118,5 +118,26 @@ namespace BlogWeb.DAO
                 return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).ToList();
             }
         }
+
+        public static void Publicar(int id)
+        {
+            using (BlogContext ctx = new BlogContext())
+            {
+                var obj = ctx.Posts.Find(id);
+                obj.Publicado = true;
+                obj.DataPublicacao = DateTime.Now;
+                ctx.SaveChanges();
+            }
+        }
+
+        public static void RetirarPublicacao(int id)
+        {
+            using (BlogContext ctx = new BlogContext())
+            {
+                var obj = ctx.Posts.Find(id);
+                obj.Publicado = false;
+                ctx.SaveChanges();
+            }
+        }
     }
 }

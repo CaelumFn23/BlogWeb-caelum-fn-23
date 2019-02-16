@@ -6,6 +6,8 @@
 <body>
     <form action="/Post/Editar" method="post">
         <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="Publicado" value="@Model.Publicado.ToString()" />
+        <input type="hidden" name="DataPublicacao" value="@Model.DataPublicacao" />
         <label>
             Titulo : <input name="Titulo" value="@Model.Titulo"/>
         </label>

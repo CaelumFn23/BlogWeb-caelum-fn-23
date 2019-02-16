@@ -55,5 +55,17 @@ namespace BlogWeb.Controllers
         {
             return View("Index",PostDAO.BuscaPorCategoria(categoria));
         }
+
+        public IActionResult Publicar(int id)
+        {
+            PostDAO.Publicar(id);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RetirarPublicacao(int id)
+        {
+            PostDAO.RetirarPublicacao(id);
+            return RedirectToAction("Index");
+        }
     }
 }
