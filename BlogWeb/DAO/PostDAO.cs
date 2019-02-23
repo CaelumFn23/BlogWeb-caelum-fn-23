@@ -147,5 +147,13 @@ namespace BlogWeb.DAO
                 return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).Select(x => x.Categoria).Distinct().ToList();
             }
         }
+
+        public static IList<Post> BuscaPublicados()
+        {
+            using (BlogContext ctx = new BlogContext())
+            {
+                return ctx.Posts.Where(p => p.Publicado).OrderByDescending(p => p.DataPublicacao).ToList();
+            }
+        }
     }
 }

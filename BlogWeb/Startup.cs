@@ -56,7 +56,7 @@ namespace BlogWeb
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Post}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

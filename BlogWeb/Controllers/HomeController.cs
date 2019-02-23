@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlogWeb.DAO;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            ViewBag.Title = "Hello World!!!";
-            return View();
-        }
+        public IActionResult Index() =>  View(PostDAO.BuscaPublicados());
     }
 }

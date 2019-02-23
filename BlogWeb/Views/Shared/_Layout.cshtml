@@ -1,11 +1,22 @@
 ﻿<html>
 <head>
+    <title>Resenha Cultural</title>
     <link href="~/css/jquery-ui.css" rel="stylesheet" />
-    <title>Novo Post</title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/estilo.css" rel="stylesheet" />
 </head>
 <body>
-    @RenderBody()
+    @Html.Partial("_Cabecalho")
 
+    <div class="container clearfix">
+        <main>
+            @RenderBody()
+        </main>
+        @Html.Partial("_Lateral")
+    </div>
+
+    @Html.Partial("_Rodape")
+    
     @RenderSection("Scripts", false)
 </body>
 </html>
