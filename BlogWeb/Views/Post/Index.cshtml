@@ -1,57 +1,54 @@
-﻿@model IEnumerable<BlogWeb.Models.Post>
-<html>
-<head>
-    <title>Lista de Posts</title>
-</head>
-<body>
-    <table>
-        <thead>
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<BlogWeb.Models.Post>
+
+<table>
+    <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Resumo</th>
+            <th>Categoria</th>
+            <th>Publicado</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
             <tr>
-                <th>Titulo</th>
-                <th>Resumo</th>
-                <th>Categoria</th>
-                <th>Publicado</th>
-                <th></th>
-                <th></th>
+                <td>
+                    @Html.ActionLink(item.Titulo, "Visualiza", new { id = item.Id })
+                    @*<a href="/Post/Visualiza/@item.Id"></a>*@
+                </td>
+                <td>@item.Resumo</td>
+                <td>@item.Categoria</td>
+                @if (item.Publicado)
+                {
+                    <td>@string.Format("{0:dd/MM/yyyy}", item.DataPublicacao)</td>
+                }
+                else
+                {
+                    <td>Não</td>
+                }
+                <td></td>
+                <td>
+                    @Html.ActionLink("Remover", "Remover", new { id = item.Id })
+                </td>
+                @if (!item.Publicado)
+                {
+                    <td>
+                        @Html.ActionLink("Publicar", "Publicar", new { id = item.Id })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Retirar Publicacao", "RetirarPublicacao", new { id = item.Id })
+                    </td>
+                }
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.Titulo, "Visualiza", new { id = item.Id })
-                        @*<a href="/Post/Visualiza/@item.Id"></a>*@
-                    </td>
-                    <td>@item.Resumo</td>
-                    <td>@item.Categoria</td>
-                    @if (item.Publicado)
-                    {
-                        <td>@string.Format("{0:dd/MM/yyyy}", item.DataPublicacao)</td>
-                    }
-                    else
-                    {
-                        <td>Não</td>
-                    }
-                    <td></td>
-                    <td>
-                        @Html.ActionLink("Remover", "Remover", new { id = item.Id })
-                    </td>
-                    @if (!item.Publicado)
-                    {
-                        <td>
-                            @Html.ActionLink("Publicar", "Publicar", new { id = item.Id })
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.ActionLink("Retirar Publicacao", "RetirarPublicacao", new { id = item.Id })
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+        }
+    </tbody>
+</table>

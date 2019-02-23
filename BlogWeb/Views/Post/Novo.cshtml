@@ -1,45 +1,41 @@
-﻿@model BlogWeb.Models.Post
-<html>
-<head>
-    <link href="~/css/jquery-ui.css" rel="stylesheet" />
-    <title>Novo Post</title>
-</head>
-<body>
-    @*<form action="/Post/Adiciona" method="post">
-            <label>
-                Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
-            </label>
-            @Html.ValidationMessage("Titulo")
-            <label>
-                Resumo : <input name="Resumo" required value="@Model.Resumo" />
-            </label>
-            @Html.ValidationMessage("Resumo")
-            <label>
-                Categoria : <input name="Categoria" value="@Model.Categoria" />
-            </label>
-            <button type="submit">Submeter</button>
-        </form>*@
-    @using (Html.BeginForm("Adiciona", "Post"))
-    {
-        @Html.LabelFor(x => x.Titulo)
-        @Html.TextBoxFor(x => x.Titulo)
-        @Html.ValidationMessageFor(x => x.Titulo)
-
-        @Html.LabelFor(x => x.Resumo)
-        @Html.TextBoxFor(x => x.Resumo)
-        @Html.ValidationMessageFor(x => x.Resumo)
-
-        @Html.LabelFor(x => x.Categoria)
-        @Html.TextBoxFor(x => x.Categoria)
-
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model BlogWeb.Models.Post
+@*<form action="/Post/Adiciona" method="post">
+        <label>
+            Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
+        </label>
+        @Html.ValidationMessage("Titulo")
+        <label>
+            Resumo : <input name="Resumo" required value="@Model.Resumo" />
+        </label>
+        @Html.ValidationMessage("Resumo")
+        <label>
+            Categoria : <input name="Categoria" value="@Model.Categoria" />
+        </label>
         <button type="submit">Submeter</button>
-    }
-    <script src="~/js/jquery-1.10.2.js"></script>
-    <script src="~/js/jquery.validate.js"></script>
-    <script src="~/js/jquery.validate.unobtrusive.js"></script>
-    <script src="~/js/jquery-ui.js"></script>
+    </form>*@
+@using (Html.BeginForm("Adiciona", "Post"))
+{
+    @Html.LabelFor(x => x.Titulo)
+    @Html.TextBoxFor(x => x.Titulo)
+    @Html.ValidationMessageFor(x => x.Titulo)
+
+    @Html.LabelFor(x => x.Resumo)
+    @Html.TextBoxFor(x => x.Resumo)
+    @Html.ValidationMessageFor(x => x.Resumo)
+
+    @Html.LabelFor(x => x.Categoria)
+    @Html.TextBoxFor(x => x.Categoria)
+
+    <button type="submit">Submeter</button>
+}
+@section Scripts{
+
+    @Html.Partial("_Scripts")
     <script>
-        $("[name='Categoria']").autocomplete({
+         $("[name='Categoria']").autocomplete({
             source: function (request, response) {
                 $.post("@Url.Action("AutoCompleteCategoria")",
                     { termoDigitado: request.term },
@@ -49,5 +45,4 @@
             }
         });
     </script>
-</body>
-</html>
+}

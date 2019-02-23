@@ -1,11 +1,8 @@
-﻿@addTagHelper	*,	Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@addTagHelper	*,	Microsoft.AspNetCore.Mvc.TagHelpers
 @model BlogWeb.Models.Post
-<html>
-<head>
-    <link href="~/css/jquery-ui.css" rel="stylesheet" />
-    <title>Novo Post</title>
-</head>
-<body>
     @*<form action="/Post/Editar" method="post">
             <input type="hidden" name="Id" value="@Model.Id" />
             <input type="hidden" name="Publicado" value="@Model.Publicado.ToString()" />
@@ -47,5 +44,3 @@
     @*<script>
             $("form").validate();
         </script>*@
-</body>
-</html>
