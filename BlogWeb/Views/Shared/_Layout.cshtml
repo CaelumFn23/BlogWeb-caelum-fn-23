@@ -1,4 +1,5 @@
-﻿<html>
+﻿@addTagHelper	*,	Microsoft.AspNetCore.Mvc.TagHelpers
+<html>
 <head>
     <title>Resenha Cultural</title>
     <link href="~/css/jquery-ui.css" rel="stylesheet" />
@@ -16,7 +17,8 @@
     </div>
 
     @Html.Partial("_Rodape")
-    
+
+    @Html.Partial("_Scripts")
     @RenderSection("Scripts", false)
 </body>
 </html>

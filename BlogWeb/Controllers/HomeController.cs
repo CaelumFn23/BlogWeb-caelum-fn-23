@@ -9,6 +9,8 @@ namespace BlogWeb.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index() =>  View(PostDAO.BuscaPublicados());
+        public IActionResult Index() => View(PostDAO.BuscaPublicados());
+
+        public IActionResult Busca(string texto) => View("Index", PostDAO.BuscaPublicadosBusca(texto));
     }
 }

@@ -1,6 +1,13 @@
-﻿<aside>
+﻿
+<aside>
     <div>
         <h3>Buscar</h3>
+        <form class="inline-form" asp-controller="Home" asp-action="Busca" method="get">
+            <div class="input-group">
+                <input class="form-control" name="texto" />
+                <button class="btn btn-primary" type="submit">Pesquisar</button>
+            </div>
+        </form>
     </div>
     <div id="Categorias">
         <h3>Categorias</h3>
