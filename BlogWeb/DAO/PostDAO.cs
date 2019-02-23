@@ -139,5 +139,13 @@ namespace BlogWeb.DAO
                 ctx.SaveChanges();
             }
         }
+
+        public static IList<string> AutoCompleteCategoria(string categoria)
+        {
+            using (BlogContext ctx = new BlogContext())
+            {
+                return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).Select(x => x.Categoria).Distinct().ToList();
+            }
+        }
     }
 }

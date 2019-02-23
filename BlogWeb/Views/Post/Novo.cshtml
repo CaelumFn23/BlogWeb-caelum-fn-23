@@ -1,6 +1,7 @@
 ﻿@model BlogWeb.Models.Post
 <html>
 <head>
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
     <title>Novo Post</title>
 </head>
 <body>
@@ -36,5 +37,17 @@
     <script src="~/js/jquery-1.10.2.js"></script>
     <script src="~/js/jquery.validate.js"></script>
     <script src="~/js/jquery.validate.unobtrusive.js"></script>
+    <script src="~/js/jquery-ui.js"></script>
+    <script>
+        $("input[name='Categoria']").autocomplete({
+            source: function (request, response) {
+                $.post("@Url.Action("AutoCompleteCategoria")",
+                    { termoDigitado: request.term },
+                    function (data) {
+                        response(data);
+                    });
+            }
+        });
+    </script>
 </body>
 </html>

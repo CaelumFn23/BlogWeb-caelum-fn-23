@@ -80,5 +80,10 @@ namespace BlogWeb.Controllers
             PostDAO.RetirarPublicacao(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult AutoCompleteCategoria(string termoDigitado)
+        {
+            return Json(PostDAO.AutoCompleteCategoria(termoDigitado));
+        }
     }
 }
