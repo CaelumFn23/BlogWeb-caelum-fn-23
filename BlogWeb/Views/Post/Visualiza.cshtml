@@ -1,26 +1,45 @@
-﻿@model BlogWeb.Models.Post
+﻿@addTagHelper	*,	Microsoft.AspNetCore.Mvc.TagHelpers
+@model BlogWeb.Models.Post
 <html>
 <head>
     <title>Novo Post</title>
 </head>
 <body>
-    <form action="/Post/Editar" method="post">
-        <input type="hidden" name="Id" value="@Model.Id" />
-        <input type="hidden" name="Publicado" value="@Model.Publicado.ToString()" />
-        <input type="hidden" name="DataPublicacao" value="@Model.DataPublicacao" />
-        <label>
-            Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
-        </label>
-        @Html.ValidationMessage("Titulo")
-        <label>
-            Resumo : <input name="Resumo" required value="@Model.Resumo" />
-        </label>
-        @Html.ValidationMessage("Resumo")
-        <label>
-            Categoria : <input name="Categoria" value="@Model.Categoria" />
-        </label>
-        <button type="submit">Submeter</button>
-    </form>
+    @*<form action="/Post/Editar" method="post">
+            <input type="hidden" name="Id" value="@Model.Id" />
+            <input type="hidden" name="Publicado" value="@Model.Publicado.ToString()" />
+            <input type="hidden" name="DataPublicacao" value="@Model.DataPublicacao" />
+            <label>
+                Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
+            </label>
+            @Html.ValidationMessage("Titulo")
+            <label>
+                Resumo : <input name="Resumo" required value="@Model.Resumo" />
+            </label>
+            @Html.ValidationMessage("Resumo")
+            <label>
+                Categoria : <input name="Categoria" value="@Model.Categoria" />
+            </label>
+            <button type="submit">Submeter</button>
+        </form>*@
+
+    <form asp-controller="Post" asp-action="Editar" method="post">
+            <input type="hidden" asp-for="Id" value="@Model.Id" />
+            <input type="hidden" asp-for="Publicado" value="@Model.Publicado.ToString()" />
+            <input type="hidden" asp-for="DataPublicacao" value="@Model.DataPublicacao" />
+            <label>
+                Titulo : <input asp-for="Titulo"/>
+            </label>
+            @Html.ValidationMessage("Titulo")
+            <label>
+                Resumo : <input asp-for="Resumo"/>
+            </label>
+            @Html.ValidationMessage("Resumo")
+            <label>
+                Categoria : <input asp-for="Categoria"/>
+            </label>
+            <button type="submit">Submeter</button>
+        </form>
     <script src="~/js/jquery-1.10.2.js"></script>
     <script src="~/js/jquery.validate.js"></script>
     <script>

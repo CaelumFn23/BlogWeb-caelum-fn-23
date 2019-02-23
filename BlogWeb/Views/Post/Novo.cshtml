@@ -4,24 +4,37 @@
     <title>Novo Post</title>
 </head>
 <body>
-    <form action="/Post/Adiciona" method="post">
-        <label>
-            Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
-        </label>
-        @Html.ValidationMessage("Titulo")
-        <label>
-            Resumo : <input name="Resumo" required value="@Model.Resumo" />
-        </label>
-        @Html.ValidationMessage("Resumo")
-        <label>
-            Categoria : <input name="Categoria" value="@Model.Categoria" />
-        </label>
+    @*<form action="/Post/Adiciona" method="post">
+            <label>
+                Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
+            </label>
+            @Html.ValidationMessage("Titulo")
+            <label>
+                Resumo : <input name="Resumo" required value="@Model.Resumo" />
+            </label>
+            @Html.ValidationMessage("Resumo")
+            <label>
+                Categoria : <input name="Categoria" value="@Model.Categoria" />
+            </label>
+            <button type="submit">Submeter</button>
+        </form>*@
+    @using (Html.BeginForm("Adiciona", "Post"))
+    {
+        @Html.LabelFor(x => x.Titulo)
+        @Html.TextBoxFor(x => x.Titulo)
+        @Html.ValidationMessageFor(x => x.Titulo)
+
+        @Html.LabelFor(x => x.Resumo)
+        @Html.TextBoxFor(x => x.Resumo)
+        @Html.ValidationMessageFor(x => x.Resumo)
+
+        @Html.LabelFor(x => x.Categoria)
+        @Html.TextBoxFor(x => x.Categoria)
+
         <button type="submit">Submeter</button>
-    </form>
+    }
     <script src="~/js/jquery-1.10.2.js"></script>
     <script src="~/js/jquery.validate.js"></script>
-    <script>
-        $("form").validate();
-    </script>
+    <script src="~/js/jquery.validate.unobtrusive.js"></script>
 </body>
 </html>
