@@ -1,7 +1,4 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@addTagHelper	*,	Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@addTagHelper	*,	Microsoft.AspNetCore.Mvc.TagHelpers
 @model BlogWeb.Models.Post
 @*<form action="/Post/Editar" method="post">
         <input type="hidden" name="Id" value="@Model.Id" />
@@ -26,17 +23,17 @@
     <input type="hidden" asp-for="Publicado" value="@Model.Publicado.ToString()" />
     <input type="hidden" asp-for="DataPublicacao" value="@Model.DataPublicacao" />
     <label>
-        Titulo : <input asp-for="Titulo" />
+        Titulo : <input asp-for="Titulo"  class="form-control"/>
     </label>
     @Html.ValidationMessage("Titulo")
     <label>
-        Resumo : <input asp-for="Resumo" />
+        Resumo : <input asp-for="Resumo" class="form-control"/>
     </label>
     @Html.ValidationMessage("Resumo")
     <label>
-        Categoria : <input asp-for="Categoria" />
+        Categoria : <input asp-for="Categoria" class="form-control"/>
     </label>
-    <button type="submit">Submeter</button>
+    <button type="submit" class="btn btn-primary">Submeter</button>
 </form>
 <script src="~/js/jquery-1.10.2.js"></script>
 <script src="~/js/jquery.validate.js"></script>

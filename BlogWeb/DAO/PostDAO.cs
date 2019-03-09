@@ -11,7 +11,14 @@ namespace BlogWeb.DAO
 {
     public class PostDAO
     {
-        public static IEnumerable<Post> Lista()
+        public PostDAO(BlogContext ctx)
+        {
+            this.ctx = ctx;
+        }
+
+        private BlogContext ctx;
+
+        public IEnumerable<Post> Lista()
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
             //{
@@ -31,14 +38,11 @@ namespace BlogWeb.DAO
             //            });
             //    }
             //}
-            using (BlogContext ctx = new BlogContext())
-            {
-                return ctx.Posts.ToList();
-            }
-            
+
+            return ctx.Posts.ToList();
         }
 
-        public static Post FirstOrDefault(int id)
+        public Post FirstOrDefault(int id)
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
             //{
@@ -53,13 +57,10 @@ namespace BlogWeb.DAO
             //    return new Post();
             //}
 
-            using (BlogContext ctx = new BlogContext())
-            {
-                return ctx.Posts.FirstOrDefault(x => x.Id == id);
-            }
+            return ctx.Posts.FirstOrDefault(x => x.Id == id);
         }
 
-        public static void Editar(Post p)
+        public void Editar(Post p)
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
             //{
@@ -68,15 +69,12 @@ namespace BlogWeb.DAO
             //    cmd.ExecuteNonQuery();
             //}
 
-            using (BlogContext ctx = new BlogContext())
-            {
-                ctx.Posts.Update(p);
-                //ctx.Entry(p).State = EntityState.Modified;
-                ctx.SaveChanges();
-            }
+            ctx.Posts.Update(p);
+            //ctx.Entry(p).State = EntityState.Modified;
+            ctx.SaveChanges();
         }
 
-        public static void Adiciona(Post p)
+        public void Adiciona(Post p)
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
             //{
@@ -84,14 +82,12 @@ namespace BlogWeb.DAO
             //    cmd.CommandText = "INSERT INTO Post VALUES ('" + p.Titulo + "','" + p.Resumo + "','" + p.Categoria + "')";
             //    cmd.ExecuteNonQuery();
             //}
-            using (BlogContext ctx = new BlogContext())
-            {
-                ctx.Posts.Add(p);
-                ctx.SaveChanges();
-            }
+
+            ctx.Posts.Add(p);
+            ctx.SaveChanges();
         }
 
-        public static void Remover(int id)
+        public void Remover(int id)
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
             //{
@@ -100,68 +96,50 @@ namespace BlogWeb.DAO
             //    cmd.ExecuteNonQuery();
             //}
 
-            using (BlogContext ctx = new BlogContext())
+            var obj = ctx.Posts.FirstOrDefault(x => x.Id == id);
+            if (obj != null)
             {
-                var obj = ctx.Posts.FirstOrDefault(x => x.Id == id);
-                if (obj != null)
-                {
-                    ctx.Posts.Remove(obj);
-                    ctx.SaveChanges();
-                }
-            }
-        }
-
-        public static IEnumerable<Post> BuscaPorCategoria(string categoria)
-        {
-            using (BlogContext ctx = new BlogContext())
-            {
-                return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).ToList();
-            }
-        }
-
-        public static void Publicar(int id)
-        {
-            using (BlogContext ctx = new BlogContext())
-            {
-                var obj = ctx.Posts.Find(id);
-                obj.Publicado = true;
-                obj.DataPublicacao = DateTime.Now;
+                ctx.Posts.Remove(obj);
                 ctx.SaveChanges();
             }
+
         }
 
-        public static void RetirarPublicacao(int id)
+        public IEnumerable<Post> BuscaPorCategoria(string categoria)
         {
-            using (BlogContext ctx = new BlogContext())
-            {
-                var obj = ctx.Posts.Find(id);
-                obj.Publicado = false;
-                ctx.SaveChanges();
-            }
+            return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).ToList();
         }
 
-        public static IList<string> AutoCompleteCategoria(string categoria)
+        public void Publicar(int id)
         {
-            using (BlogContext ctx = new BlogContext())
-            {
-                return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).Select(x => x.Categoria).Distinct().ToList();
-            }
+            var obj = ctx.Posts.Find(id);
+            obj.Publicado = true;
+            obj.DataPublicacao = DateTime.Now;
+            ctx.SaveChanges();
         }
 
-        public static IList<Post> BuscaPublicados()
+        public void RetirarPublicacao(int id)
         {
-            using (BlogContext ctx = new BlogContext())
-            {
-                return ctx.Posts.Where(p => p.Publicado).OrderByDescending(p => p.DataPublicacao).ToList();
-            }
+            var obj = ctx.Posts.Find(id);
+            obj.Publicado = false;
+            ctx.SaveChanges();
         }
 
-        public static IList<Post> BuscaPublicadosBusca(string texto)
+        public IList<string> AutoCompleteCategoria(string categoria)
         {
-            using (BlogContext ctx = new BlogContext())
-            {
-                return ctx.Posts.Where(p => p.Publicado &&(p.Titulo.Contains(texto) || p.Resumo.Contains(texto))).OrderByDescending(p => p.DataPublicacao).ToList();
-            }
+            return ctx.Posts.Where(x => x.Categoria.Contains(categoria)).Select(x => x.Categoria).Distinct().ToList();
         }
+
+        public IList<Post> BuscaPublicados()
+        {
+            return ctx.Posts.Where(p => p.Publicado).OrderByDescending(p => p.DataPublicacao).ToList();
+        }
+
+        public IList<Post> BuscaPublicadosBusca(string texto)
+        {
+            return ctx.Posts.Where(p => p.Publicado && (p.Titulo.Contains(texto) || p.Resumo.Contains(texto))).OrderByDescending(p => p.DataPublicacao).ToList();
+        }
+
+        
     }
 }

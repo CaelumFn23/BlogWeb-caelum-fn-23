@@ -1,22 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
-using BlogWeb.DAO;
+﻿using BlogWeb.DAO;
 using BlogWeb.Infra;
 using BlogWeb.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogWeb.Controllers
+namespace BlogWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class PostController : Controller
     {
+        private readonly BlogContext ctx;
+        private readonly PostDAO dao;
 
+        public PostController()
+        {
+            this.ctx = new BlogContext();
+            this.dao = new PostDAO(this.ctx);
+        }
 
         public IActionResult Index()
         {
-            return View(PostDAO.Lista());
+            return View(dao.Lista());
         }
 
         public IActionResult Novo()
@@ -29,7 +32,7 @@ namespace BlogWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                PostDAO.Adiciona(p);
+                dao.Adiciona(p);
                 return RedirectToAction("Index");
             }
             else
@@ -41,7 +44,7 @@ namespace BlogWeb.Controllers
         [HttpGet]
         public IActionResult Visualiza(int id)
         {
-            return View(PostDAO.FirstOrDefault(id));
+            return View(dao.FirstOrDefault(id));
         }
 
         [HttpPost]
@@ -49,7 +52,7 @@ namespace BlogWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                PostDAO.Editar(p);
+                dao.Editar(p);
                 return RedirectToAction("Index");
             }
             else
@@ -60,30 +63,38 @@ namespace BlogWeb.Controllers
 
         public IActionResult Remover(int id)
         {
-            PostDAO.Remover(id);
+            dao.Remover(id);
             return RedirectToAction("Index");
         }
 
         public IActionResult BuscaPorCategoria(string categoria)
         {
-            return View("Index", PostDAO.BuscaPorCategoria(categoria));
+            return View("Index", dao.BuscaPorCategoria(categoria));
         }
 
         public IActionResult Publicar(int id)
         {
-            PostDAO.Publicar(id);
+            dao.Publicar(id);
             return RedirectToAction("Index");
         }
 
         public IActionResult RetirarPublicacao(int id)
         {
-            PostDAO.RetirarPublicacao(id);
+            dao.RetirarPublicacao(id);
             return RedirectToAction("Index");
         }
 
         public IActionResult AutoCompleteCategoria(string termoDigitado)
         {
-            return Json(PostDAO.AutoCompleteCategoria(termoDigitado));
+            return Json(dao.AutoCompleteCategoria(termoDigitado));
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+                ctx.Dispose();
+
+            base.Dispose(disposing);
         }
     }
 }

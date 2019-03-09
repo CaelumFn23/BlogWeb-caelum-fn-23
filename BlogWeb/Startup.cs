@@ -55,6 +55,9 @@ namespace BlogWeb
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "Admin",
+                    template: "{area:exists}/{controller=Post}/{action=Index}/{id?}");
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

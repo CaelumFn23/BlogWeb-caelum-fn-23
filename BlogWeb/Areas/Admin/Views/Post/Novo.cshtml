@@ -1,7 +1,4 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-@model BlogWeb.Models.Post
+﻿@model BlogWeb.Models.Post
 @*<form action="/Post/Adiciona" method="post">
         <label>
             Titulo : <input name="Titulo" maxlength="50" required value="@Model.Titulo" />
@@ -18,18 +15,18 @@
     </form>*@
 @using (Html.BeginForm("Adiciona", "Post"))
 {
-    @Html.LabelFor(x => x.Titulo)
-    @Html.TextBoxFor(x => x.Titulo)
-    @Html.ValidationMessageFor(x => x.Titulo)
+@Html.LabelFor(x => x.Titulo)
+@Html.TextBoxFor(x => x.Titulo ,new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.Titulo)
 
-    @Html.LabelFor(x => x.Resumo)
-    @Html.TextBoxFor(x => x.Resumo)
-    @Html.ValidationMessageFor(x => x.Resumo)
+@Html.LabelFor(x => x.Resumo)
+@Html.TextAreaFor(x => x.Resumo , new { @class = "form-control" })
+@Html.ValidationMessageFor(x => x.Resumo)
 
-    @Html.LabelFor(x => x.Categoria)
-    @Html.TextBoxFor(x => x.Categoria)
+@Html.LabelFor(x => x.Categoria)
+@Html.TextBoxFor(x => x.Categoria, new { @class = "form-control" })
 
-    <button type="submit">Submeter</button>
+<button type="submit" class="btn btn-primary">Submeter</button>
 }
 @section Scripts{
     <script>
