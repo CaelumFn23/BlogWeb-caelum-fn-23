@@ -6,25 +6,15 @@ namespace BlogWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly BlogContext ctx;
         private readonly PostDAO dao;
 
-        public HomeController()
+        public HomeController(PostDAO dao)
         {
-            this.ctx = new BlogContext();
-            this.dao = new PostDAO(this.ctx);
+            this.dao = dao;
         }
 
         public IActionResult Index() => View(dao.BuscaPublicados());
 
         public IActionResult Busca(string texto) => View("Index", dao.BuscaPublicadosBusca(texto));
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-                ctx.Dispose();
-
-            base.Dispose(disposing);
-        }
     }
 }

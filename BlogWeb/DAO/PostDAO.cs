@@ -11,13 +11,13 @@ namespace BlogWeb.DAO
 {
     public class PostDAO
     {
+        private BlogContext ctx;
+
         public PostDAO(BlogContext ctx)
         {
             this.ctx = ctx;
         }
-
-        private BlogContext ctx;
-
+        
         public IEnumerable<Post> Lista()
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())

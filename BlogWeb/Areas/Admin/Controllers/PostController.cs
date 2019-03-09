@@ -8,13 +8,11 @@ namespace BlogWeb.Areas.Admin.Controllers
     [Area("Admin")]
     public class PostController : Controller
     {
-        private readonly BlogContext ctx;
         private readonly PostDAO dao;
 
-        public PostController()
+        public PostController(PostDAO dao)
         {
-            this.ctx = new BlogContext();
-            this.dao = new PostDAO(this.ctx);
+            this.dao = dao;
         }
 
         public IActionResult Index()
@@ -89,12 +87,12 @@ namespace BlogWeb.Areas.Admin.Controllers
             return Json(dao.AutoCompleteCategoria(termoDigitado));
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-                ctx.Dispose();
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //        ctx.Dispose();
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
     }
 }
