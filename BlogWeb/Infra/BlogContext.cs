@@ -18,6 +18,7 @@ namespace BlogWeb.Infra
 
         public DbSet<Post> Posts{ get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    var builder = new ConfigurationBuilder()

@@ -4,14 +4,16 @@ using BlogWeb.Infra;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlogWeb.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20190316180621_teste12345")]
+    partial class teste12345
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,8 +26,6 @@ namespace BlogWeb.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("AutorId");
 
                     b.Property<string>("Categoria");
 
@@ -40,9 +40,11 @@ namespace BlogWeb.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
+                    b.Property<int?>("UsuarioId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AutorId");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Posts");
                 });
@@ -74,9 +76,9 @@ namespace BlogWeb.Migrations
 
             modelBuilder.Entity("BlogWeb.Models.Post", b =>
                 {
-                    b.HasOne("BlogWeb.Models.Usuario", "Autor")
+                    b.HasOne("BlogWeb.Models.Usuario")
                         .WithMany("Posts")
-                        .HasForeignKey("AutorId");
+                        .HasForeignKey("UsuarioId");
                 });
 #pragma warning restore 612, 618
         }

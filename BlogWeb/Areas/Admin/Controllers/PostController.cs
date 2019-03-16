@@ -1,11 +1,15 @@
 ﻿using BlogWeb.DAO;
+using BlogWeb.Filter;
 using BlogWeb.Infra;
 using BlogWeb.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace BlogWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [AutorizacaoFilter]
     public class PostController : Controller
     {
         private readonly PostDAO dao;
@@ -30,7 +34,9 @@ namespace BlogWeb.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                dao.Adiciona(p);
+                var usuario = JsonConvert.DeserializeObject<Usuario>(HttpContext.Session.GetString("usuario"));
+
+                dao.Adiciona(p, usuario);
                 return RedirectToAction("Index");
             }
             else

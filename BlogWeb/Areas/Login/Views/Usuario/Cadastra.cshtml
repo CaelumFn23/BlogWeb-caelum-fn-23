@@ -1,0 +1,30 @@
+﻿@model BlogWeb.Areas.Login.Models.RegistroViewModel
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using (Html.BeginForm("Cadastra", "Usuario"))
+{
+    @Html.ValidationSummary()
+
+    @Html.LabelFor(x => x.Name)
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name)
+
+    @Html.LabelFor(x => x.LoginName)
+    @Html.TextBoxFor(x => x.LoginName, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.LoginName)
+
+    @Html.LabelFor(x => x.Email)
+    @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Email)
+
+    @Html.LabelFor(x => x.Senha)
+    @Html.PasswordFor(x => x.Senha, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Senha)
+
+    @Html.LabelFor(x => x.ConfirmacaoSenha)
+    @Html.PasswordFor(x => x.ConfirmacaoSenha, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.ConfirmacaoSenha)
+    <br />
+    <button type="submit" class="btn btn-success">Cadastrar</button>
+}

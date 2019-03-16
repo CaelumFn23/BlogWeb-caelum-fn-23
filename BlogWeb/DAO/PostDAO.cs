@@ -74,7 +74,7 @@ namespace BlogWeb.DAO
             ctx.SaveChanges();
         }
 
-        public void Adiciona(Post p)
+        public void Adiciona(Post p, Usuario u)
         {
             //using (SqlConnection conexao = ConnectionFactory.CriaConexaoAberta())
             //{
@@ -82,6 +82,8 @@ namespace BlogWeb.DAO
             //    cmd.CommandText = "INSERT INTO Post VALUES ('" + p.Titulo + "','" + p.Resumo + "','" + p.Categoria + "')";
             //    cmd.ExecuteNonQuery();
             //}
+            ctx.Usuarios.Attach(u);
+            p.Autor = u;
 
             ctx.Posts.Add(p);
             ctx.SaveChanges();
